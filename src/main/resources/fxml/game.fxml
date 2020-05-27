@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 18;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flipcoin.javafx.controller.GameController">
+   <center>
+      <GridPane fx:id="gameGrid" prefHeight="167.0" prefWidth="570.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="0" />
+            <ImageView fitHeight="80.0" fitWidth="80.0" onMouseClicked="#handleClickOnCoin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="0" />
+         </children>
+      </GridPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player turn:" />
+            <Label fx:id="playerTurn" prefHeight="33.0" prefWidth="249.0" textFill="#160abf" wrapText="true">
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Label>
+            <Button fx:id="flipButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFlipButton" prefHeight="46.0" prefWidth="95.0" text="Flip" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="errorLabel" alignment="CENTER" prefHeight="57.0" prefWidth="295.0" textAlignment="CENTER" textFill="#f52206" wrapText="true" />
+         </children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <top>
+      <Label fx:id="messageLabel" style="-fx-font-size: 150%;" text="Label" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <right>
+      <VBox prefHeight="167.0" prefWidth="100.0" spacing="35.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="15.0" />
+         </BorderPane.margin>
+         <children>
+            <Button fx:id="giveUpButton" mnemonicParsing="false" onAction="#handleGiveUpButton" prefHeight="46.0" prefWidth="95.0" text="Give Up" />
+            <Button fx:id="resetButton" mnemonicParsing="false" onAction="#handleResetButton" prefHeight="46.0" prefWidth="95.0" text="Reset">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Button>
+         </children>
+         <padding>
+            <Insets top="35.0" />
+         </padding>
+      </VBox>
+   </right>
+</BorderPane>
