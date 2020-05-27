@@ -19,11 +19,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
+import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
+@Slf4j
 public class GameController {
 
     private FXMLLoader fxmlLoader  = new FXMLLoader();
@@ -76,6 +76,8 @@ public class GameController {
         );
         gameOver.addListener((observable, oldValue, newValue) -> {
             if (newValue) {
+                log.info("Game is over");
+                log.debug("Saving result to database...");
                 gameResultDao.persist(createGameResult());
             }
         });
@@ -94,6 +96,9 @@ public class GameController {
     private void displayGameState() {
         for (int i = 0; i < 10; i++) {
             ImageView view = (ImageView) gameGrid.getChildren().get(i);
+            if (view.getImage() != null) {
+                log.trace("Image(0, {}) = {}", i, view.getImage().getUrl());
+            }
             if(gameState.getCoinBoard()[i]=='H')
                 view.setImage(coinImages.get(0));
             else if (gameState.getCoinBoard()[i]=='T')
@@ -106,13 +111,15 @@ public class GameController {
 
     public void handleClickOnCoin(MouseEvent mouseEvent) {
         int col = GridPane.getColumnIndex((Node) mouseEvent.getSource());
+        log.debug("Coin (0, {}) is pressed", col);
         Set<Integer> clickedCoinSet = new HashSet<>(clickedCoin);
 
         clickedCoin.add(col);
         ((Node) mouseEvent.getSource()).setStyle("-fx-effect: innershadow(gaussian, #039ed3, 10, 1.0, 0, 0);");
     }
 
-    public void handleFlipButton() {
+    public void handleFlipButton(ActionEvent actionEvent) {
+        log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
         errorLabel.setText("");
         List<Integer> clickedCoinSet = new ArrayList<>((new HashSet<>(clickedCoin)));;
 
@@ -136,11 +143,13 @@ public class GameController {
 
             if (gameState.isGameFinished()) {
                 gameOver.setValue(true);
+
                 if (turn == 1)
                     winnerName= playerName1 ;
                 else
                     winnerName= playerName2 ;
                 messageLabel.setText("Congratulations, " + winnerName + "!");
+                log.info("Player {} has solved the game.", winnerName);
                 flipButton.setDisable(true);
                 playerTurn.setText("");
                 resetButton.setDisable(true);
@@ -155,12 +164,20 @@ public class GameController {
 
         clickedCoin = new ArrayList<>();
     }
-    public void handleResetButton()  {
+    public void handleResetButton(ActionEvent actionEvent)  {
+        log.debug("{} is pressed", ((Button) actionEvent.getSource()).getText());
+        log.info("Resetting game...");
         resetGame();
     }
 
     public void handleGiveUpButton(ActionEvent actionEvent) throws IOException {
+        String buttonText = ((Button) actionEvent.getSource()).getText();
+        log.debug("{} is pressed", buttonText);
+        if (buttonText.equals("Give Up")) {
+            log.info("The game has been given up");
+        }
         gameOver.setValue(true);
+        log.info("Loading high scores scene...");
         fxmlLoader.setLocation(getClass().getResource("/fxml/highscores.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

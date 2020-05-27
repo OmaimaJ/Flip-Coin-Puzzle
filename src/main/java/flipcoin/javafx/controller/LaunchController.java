@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.inject.Inject;
 import java.io.IOException;
 
-
+@Slf4j
 public class LaunchController {
 
 
@@ -47,6 +47,7 @@ public class LaunchController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
+            log.info("The players name is set to {} & {}, loading game scene", playerNameTextField1.getText(), playerNameTextField2.getText());
         }
     }
 

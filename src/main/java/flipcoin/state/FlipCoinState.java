@@ -1,8 +1,10 @@
 package flipcoin.state;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
+@Slf4j
 public class FlipCoinState {
     private char[] coinBoard = new char[]{'H','H','H','H','H','H','H','H','H','H'};
 
@@ -18,6 +20,7 @@ public class FlipCoinState {
             coinBoard[col] = 'T';
         else
             coinBoard[col] = 'H';
+        log.info("Coin at (0,{}) is flipped to {}", col,coinBoard[col]);
     }
 
     public boolean isGameFinished()
