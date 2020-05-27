@@ -14,7 +14,7 @@ public class GameResultDao extends GenericJpaDao<GameResult3> {
     private static GameResultDao instance; private GameResultDao() { super(GameResult3.class); }
 
     /**
-     * Creates an entity manager named {@code flip-coin}
+     * Creates an entity manager named {@code flip-coin}.
      * @return instance of {@code GameResultDao}
      */
     public static GameResultDao getInstance() {
@@ -25,7 +25,7 @@ public class GameResultDao extends GenericJpaDao<GameResult3> {
         return instance; }
 
     /**
-     * Returns the list of {@code n} best results with respect to
+     * Returns the list of {@code n} best results with respect to.
      *
      * @param n the maximum number of results to be returned
      * @return the list of {@code n} best results with respect to

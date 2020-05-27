@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package flipcoin.javafx.controller;
 
 import javafx.collections.FXCollections;

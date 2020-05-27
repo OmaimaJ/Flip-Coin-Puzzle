@@ -1,3 +1,4 @@
+// CHECKSTYLE:OFF
 package flipcoin.javafx;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
