@@ -227,6 +227,18 @@
             <reporting>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>javadoc</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                    <plugin>
                         <groupId>org.openclover</groupId>
                         <artifactId>clover-maven-plugin</artifactId>
                         <version>4.4.1</version>
