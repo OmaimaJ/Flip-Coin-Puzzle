@@ -6,6 +6,7 @@ import lombok.Setter;
 
 public class StoringData {
 
+
         @Setter
         @Getter
         private static String p1;

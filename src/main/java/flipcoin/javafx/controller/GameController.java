@@ -42,6 +42,7 @@ public class GameController {
     private Player3 player2 = new Player3();
     private FlipCoinState gameState;
     private List<Image> coinImages;
+    private boolean isSolved;
     private int turn=0;
     private int player1Steps =0;
     private int player2Steps =0;
@@ -104,19 +105,21 @@ public class GameController {
                 log.debug("Saving result to database...");
 
                 if (((Optional<Player3>) playerDao.find(player1.getPlayerName())).isPresent()) {
-                    playerDao.update(player1.getPlayerName(),player1.getWins());
+                    playerDao.update(player1.getPlayerName(), player1.getWins());
                 } else {
                     playerDao.persist(player1);
                 }
 
                 if (((Optional<Player3>) playerDao.find(player2.getPlayerName())).isPresent()) {
-                    playerDao.update(player2.getPlayerName(),player2.getWins());
+                    playerDao.update(player2.getPlayerName(), player2.getWins());
                 } else {
                     playerDao.persist(player2);
                 }
 
-
-                gameResultDao.persist(createGameResult());}
+                if (isSolved) {
+                    gameResultDao.persist(createGameResult());
+                }
+            }
 
 
         });
@@ -188,7 +191,7 @@ public class GameController {
 
             if (gameState.isGameFinished()) {
 
-
+                isSolved = true;
                 if (turn == 1){
                     winner= player1;
                     this.player1.setWins(this.player1.getWins()+1);
