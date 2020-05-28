@@ -46,9 +46,6 @@ public class LaunchController {
             StoringData.setP2(playerNameTextField2.getText().trim());
             fxmlLoader.setLocation(getClass().getResource("/fxml/game.fxml"));
             Parent root = fxmlLoader.load();
-          //  fxmlLoader.<GameController>getController().setPlayerName1(playerNameTextField1.getText());
-          //  fxmlLoader.<GameController>getController().setPlayerName2(playerNameTextField2.getText())S
-
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

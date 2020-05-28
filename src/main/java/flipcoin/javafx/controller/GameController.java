@@ -71,29 +71,18 @@ public class GameController {
 
     private BooleanProperty gameOver = new SimpleBooleanProperty();
 
-//    public void setPlayerName1(String playerName) {
-//        this.player1.setPlayerName(playerName);
-//        playerTurn.setText(playerName);
-//        this.player1.setWins(0);
-//    }
-//    public void setPlayerName2(String playerName) {
-//        this.player2.setPlayerName(playerName);
-//        playerTurn.setText(playerName);
-//        this.player2.setWins(0);
-//    }
-
-
     @FXML
     public void initialize() {
-        player1= new Player3(StoringData.getP1(),0);
+        player1 = new Player3(StoringData.getP1(),0);
         player2 = new Player3(StoringData.getP2(),0);
         gameResultDao = GameResultDao.getInstance();
         playerDao = PlayerDao.getInstance();
+
         Optional<Player3> data1 = playerDao.find(player1.getPlayerName());
         data1.ifPresent((Player3 d) -> {player1.setWins(d.getWins()); });
 
-        Optional<Player3> data2 = playerDao.find(this.player2.getPlayerName());
-        data2.ifPresent((Player3 d) -> { this.player2.setWins(d.getWins()); });
+        Optional<Player3> data2 = playerDao.find(player2.getPlayerName());
+        data2.ifPresent((Player3 d) -> { player2.setWins(d.getWins()); });
 
         coinImages = List.of(
                 new Image(getClass().getResource("/images/head.png").toExternalForm()),
@@ -103,21 +92,19 @@ public class GameController {
             if (newValue) {
                 log.info("Game is over");
                 log.debug("Saving result to database...");
-
-                if (((Optional<Player3>) playerDao.find(player1.getPlayerName())).isPresent()) {
-                    playerDao.update(player1.getPlayerName(), player1.getWins());
-                } else {
-                    playerDao.persist(player1);
-                }
-
-                if (((Optional<Player3>) playerDao.find(player2.getPlayerName())).isPresent()) {
-                    playerDao.update(player2.getPlayerName(), player2.getWins());
-                } else {
-                    playerDao.persist(player2);
-                }
-
                 if (isSolved) {
-                    gameResultDao.persist(createGameResult());
+                    if (((Optional<Player3>) playerDao.find(player1.getPlayerName())).isPresent()) {
+                        playerDao.update(player1.getPlayerName(), player1.getWins());
+                    } else {
+                        playerDao.persist(player1);
+                    }
+
+                    if (((Optional<Player3>) playerDao.find(player2.getPlayerName())).isPresent()) {
+                        playerDao.update(player2.getPlayerName(), player2.getWins());
+                    } else {
+                        playerDao.persist(player2);
+                    }
+                        gameResultDao.persist(createGameResult());
                 }
             }
 
@@ -128,8 +115,8 @@ public class GameController {
     }
 
     private void resetGame() {
-         player1Steps =0;
-       player2Steps =0;
+        player1Steps =0;
+        player2Steps =0;
         turn = 0;
         playerTurn.setText(player1.getPlayerName());
         gameState = new FlipCoinState();
@@ -178,9 +165,9 @@ public class GameController {
             }
             if (turn == 0) {
                 player1Steps ++;
-
                 playerTurn.setText(player2.getPlayerName());
                 turn = 1;
+
             } else {
                 player2Steps++;
                 turn = 0;

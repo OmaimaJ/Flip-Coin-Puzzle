@@ -11,7 +11,10 @@ import java.util.List;
  */
 public class GameResultDao extends GenericJpaDao<GameResult3> {
 
-    private static GameResultDao instance; private GameResultDao() { super(GameResult3.class); }
+    private static GameResultDao instance;
+    private GameResultDao() {
+        super(GameResult3.class);
+    }
 
     /**
      * Creates an entity manager named {@code flip-coin}.
