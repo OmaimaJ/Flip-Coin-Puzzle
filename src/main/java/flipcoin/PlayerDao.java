@@ -8,11 +8,19 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.util.List;
 
+/**
+ * DAO class for the {@link Player3} entity.
+ */
 public class PlayerDao extends GenericJpaDao<Player3> {
     private static PlayerDao instance;
+
     private PlayerDao(){
         super(Player3.class);
     }
+    /**
+     * Creates an entity manager named {@code flip-coin}.
+     * @return instance of {@code PlayerDao}
+     */
     public static PlayerDao getInstance(){
         if (instance == null) { instance = new PlayerDao();
             instance.setEntityManager(Persistence
@@ -20,6 +28,12 @@ public class PlayerDao extends GenericJpaDao<Player3> {
                     .createEntityManager()); }
         return instance;
     }
+
+    /**
+     *
+     * @param name Stores the player name.
+     * @param win Stores the number of wins of the player.
+     */
     public void update(String name, int win) {
         entityManager.getTransaction().begin();
         Query updateQuery = entityManager.createQuery("UPDATE Player3 set wins =:n where playerName = :name")
