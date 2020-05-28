@@ -1,6 +1,8 @@
 // CHECKSTYLE:OFF
 package flipcoin.javafx.controller;
 
+import flipcoin.Player3;
+import flipcoin.PlayerDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,21 +31,28 @@ public class HighScoreController {
 
     private GameResultDao gameResultDao;
 
-    @FXML
-    private TableView<GameResult3> highScoreTable;
+    private PlayerDao playerDao;
 
     @FXML
-    private TableColumn<GameResult3, String> player;
+    private TableView<Player3> highScoreTable;
+
+    @FXML
+    private TableColumn<Player3, String> player;
+
+    @FXML
+    private TableColumn<Player3, Integer> winCount;
 
     @FXML
     private void initialize() {
         log.debug("Loading high scores...");
         gameResultDao = GameResultDao.getInstance();
-        List<GameResult3> highScoreList = gameResultDao.findBest(5);
+        playerDao = PlayerDao.getInstance();
+        List<Player3> highScoreList = playerDao.findBest(5);
 
-        player.setCellValueFactory(new PropertyValueFactory<>("player"));
+        player.setCellValueFactory(new PropertyValueFactory<>("playerName"));
+        winCount.setCellValueFactory(new PropertyValueFactory<>("wins"));
 
-        ObservableList<GameResult3> observableResult = FXCollections.observableArrayList();
+        ObservableList<Player3> observableResult = FXCollections.observableArrayList();
         observableResult.addAll(highScoreList);
 
         highScoreTable.setItems(observableResult);

@@ -12,6 +12,7 @@
       <TableView fx:id="highScoreTable" editable="true" layoutX="25.0" layoutY="74.0" prefHeight="550.0" prefWidth="650.0">
         <columns>
           <TableColumn fx:id="player" prefWidth="325.0" text="Player" />
+            <TableColumn fx:id="winCount" prefWidth="325.0" text="Win Count" />
         </columns>
       </TableView>
       <Label layoutX="272.0" layoutY="32.0" text="High Scores">

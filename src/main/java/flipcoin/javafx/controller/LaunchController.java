@@ -1,6 +1,7 @@
 // CHECKSTYLE:OFF
 package flipcoin.javafx.controller;
 
+import flipcoin.StoringData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,10 +42,13 @@ public class LaunchController {
             errorLabel2.setText("Enter your name!");
         }
         else {
+            StoringData.setP1(playerNameTextField1.getText().trim());
+            StoringData.setP2(playerNameTextField2.getText().trim());
             fxmlLoader.setLocation(getClass().getResource("/fxml/game.fxml"));
             Parent root = fxmlLoader.load();
-            fxmlLoader.<GameController>getController().setPlayerName1(playerNameTextField1.getText());
-            fxmlLoader.<GameController>getController().setPlayerName2(playerNameTextField2.getText());
+          //  fxmlLoader.<GameController>getController().setPlayerName1(playerNameTextField1.getText());
+          //  fxmlLoader.<GameController>getController().setPlayerName2(playerNameTextField2.getText())S
+
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

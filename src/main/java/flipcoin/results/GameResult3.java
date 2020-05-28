@@ -24,10 +24,47 @@ public class GameResult3 {
      * The name of the player.
      */
     @Column(nullable = false)
-    private String player;
+    private String player1;
+
+    /**
+     * The name of the player.
+     */
+    @Column(nullable = false)
+    private String player2;
+
+    /**
+     * The name of the winner.
+     */
+    @Column(nullable = false)
+    private String winner;
+
+    /**
+     * The number of steps made by the player.
+     */
+    @Column(nullable = false)
+    private int movesByPlayer1;
+
+    /**
+     * The number of steps made by the player.
+     */
+    @Column(nullable = false)
+    private int movesByPlayer2;
 
     /**
      * Indicates whether the player has solved the puzzle.
      */
     private boolean solved;
+
+
+    /**
+     * The timestamp when the result was saved.
+     */
+    @Column(nullable = false)
+    private ZonedDateTime created;
+
+    @PrePersist
+    protected void onPersist() {
+        created = ZonedDateTime.now();
+    }
+
 }

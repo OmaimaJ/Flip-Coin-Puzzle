@@ -24,17 +24,6 @@ public class GameResultDao extends GenericJpaDao<GameResult3> {
                 .createEntityManager()); }
         return instance; }
 
-    /**
-     * Returns the list of {@code n} best results with respect to.
-     *
-     * @param n the maximum number of results to be returned
-     * @return the list of {@code n} best results with respect to
-     */
-    @Transactional
-    public List<GameResult3> findBest(int n) {
-        return entityManager.createQuery("SELECT r FROM GameResult3 r WHERE r.solved=true", GameResult3.class)
-                .setMaxResults(n)
-                .getResultList();
-    }
+
 
 }
